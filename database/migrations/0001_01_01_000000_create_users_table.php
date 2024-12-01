@@ -11,6 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('kecamatans', function (Blueprint $table) {
+            $table->id();
+            $table->string('kecamatan');
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,8 +26,11 @@ return new class extends Migration
             $table->enum('role',['admin','petugas','user']);
             $table->integer('point');
             $table->string('password');
+            $table->bigInteger('id_kecamatan')->unsigned();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('id_kecamatan')->references('id')->on('kecamatans')->onDelete('no action')->onUpdate('cascade');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

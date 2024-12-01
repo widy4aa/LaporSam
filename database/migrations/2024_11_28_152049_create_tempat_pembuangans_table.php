@@ -18,7 +18,9 @@ return new class extends Migration
             $table->float('daya_tampung');
             $table->enum('jenis',['TPS','TPA']);
             $table->string('link_gambar');
+            $table->bigInteger('id_kecamatan')->unsigned();
             $table->timestamps();
+            $table->foreign('id_kecamatan')->references('id')->on('kecamatans')->onDelete('no action')->onUpdate('cascade');
         });
 
         DB::statement('ALTER TABLE tempat_pembuangans ADD location POINT NOT NULL');
