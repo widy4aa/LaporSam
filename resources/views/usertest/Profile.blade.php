@@ -23,6 +23,7 @@
             <th scope="col">point</th>
             <th scope="col">alamat lengkap</th>
             <th scope="col">id_kecamatan</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +44,9 @@
                     <td>{{$user->point }}</td>
                     <td>{{$user->alamat_lengkap }}</td>
                     <td>{{$user->kecamatan}}</td>
+                    <td>
+                        <a href="/testDetailProfile/{{$user->id}}"> view</a>
+                    </td>
                 </tr>
             @endforeach
           </tr>

@@ -24,8 +24,25 @@ class userController extends Controller
         ->paginate(5);
 
 
+    return view('usertest.Profile', compact('users'));
+    }
 
-
-    return view('testProfile', compact('users'));
+    public function userDetail($id){
+             echo'ini user detail loh';
+             $user = DB::table('users')
+             ->select('users.id', 'name', 'username', 'link_gambar', 'role', 'location', 'alamat_lengkap','point',
+                      DB::raw('ST_X(location) AS lat'),
+                      DB::raw('ST_Y(location) AS longt'),
+                     'kecamatans.kecamatan'
+                      )
+             ->join('kecamatans', 'users.id_kecamatan', '=', 'kecamatans.id')
+             ->where('users.id','=',$id)
+             ->first()
+             ;
+             if (!$user) {
+                 abort(404, 'User not found');
+             }
+             //dd($user);
+             return view('usertest.DetailProfile', compact('user'));
     }
 }
