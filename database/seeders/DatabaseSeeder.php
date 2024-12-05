@@ -15,10 +15,48 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('kecamatans')->insert([
-            ['kecamatan'=>'wuluhan'],
-            ['kecamatan'=>'Sumbersari']
-        ]);
+
+        $faker = Faker::create();
+
+        $kecamatans = [
+            'Wuluhan',
+            'Kencong',
+            'Gumukmas',
+            'Puger',
+            'Ambulu',
+            'Tempurejo',
+            'Silo',
+            'Mayang',
+            'Mumbulsari',
+            'Jenggawah',
+            'Ajung',
+            'Rambipuji',
+            'Balung',
+            'Umbulsari',
+            'Semboro',
+            'Jombang',
+            'Sumberbaru',
+            'Tanggul',
+            'Bangsalsari',
+            'Panti',
+            'Sukorambi',
+            'Arjasa',
+            'Pakusari',
+            'Kalisat',
+            'Ledokombo',
+            'Sumberjambe',
+            'Sukowono',
+            'Jelbuk',
+            'Kaliwates',
+            'Sumbersari',
+            'Patrang',
+        ];
+
+        foreach ($kecamatans as $kecamatan) {
+            DB::table('kecamatans')->insert([
+                'kecamatan' => $kecamatan,
+            ]);
+        }
 
         DB::table('users')->insert([
             ['name' => 'Widya',
@@ -138,17 +176,6 @@ class DatabaseSeeder extends Seeder
                 'berat'=>'30'
             ]
         ]);
-
-        $faker = Faker::create();
-
-        // Seeder untuk kecamatans
-        DB::table('kecamatans')->insert([
-            ['kecamatan' => 'Wuluhan'],
-            ['kecamatan' => 'Sumbersari'],
-            ['kecamatan' => 'Ambulu'],
-            ['kecamatan' => 'Patrang']
-        ]);
-
         // Seeder untuk users
         for ($i = 1; $i <= 20; $i++) {
             DB::table('users')->insert([

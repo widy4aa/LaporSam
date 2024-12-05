@@ -16,7 +16,6 @@
             <th scope="col">id</th>
             <th scope="col">Username</th>
             <th scope="col">Name</th>
-            <th scope="col">Password</th>
             <th scope="col">Gambar</th>
             <th scope="col">role</th>
             <th scope="col">location</th>
@@ -32,7 +31,6 @@
                     <td>{{$user->id }}</td>
                     <td>{{$user->username }}</td>
                     <td>{{$user->name }}</td>
-                    <td>{{$user->username }}</td>
                     <td>{{$user->link_gambar }}</td>
                     <td>{{$user->role }}</td>
                     <td>

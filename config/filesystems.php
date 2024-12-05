@@ -13,7 +13,6 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -27,6 +26,7 @@ return [
     | Supported drivers: "local", "ftp", "sftp", "s3"
     |
     */
+    'default' => 'public',
 
     'disks' => [
 
@@ -35,6 +35,8 @@ return [
             'root' => storage_path('app/private'),
             'serve' => true,
             'throw' => false,
+            'driver' => 'local',
+            'root' => storage_path('app'),
         ],
 
         'public' => [

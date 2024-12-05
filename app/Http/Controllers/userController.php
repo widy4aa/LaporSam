@@ -27,8 +27,12 @@ class userController extends Controller
     return view('usertest.Profile', compact('users'));
     }
 
+    public function registerProfile(){
+        return view('usertest.registerProfile');
+    }
+
+
     public function userDetail($id){
-             echo'ini user detail loh';
              $user = DB::table('users')
              ->select('users.id', 'name', 'username', 'link_gambar', 'role', 'location', 'alamat_lengkap','point',
                       DB::raw('ST_X(location) AS lat'),
@@ -44,5 +48,10 @@ class userController extends Controller
              }
              //dd($user);
              return view('usertest.DetailProfile', compact('user'));
+    }
+
+    public function registerUser(Request $request){
+        $user = $request->all();
+        return $request->file('gambar')->store('img');
     }
 }
