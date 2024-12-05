@@ -39,6 +39,9 @@ $kecamatans = [
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
 
+        <label for="pass">pass:</label>
+        <input type="text" id="pass" name="password" required><br><br>
+
         <label for="gambar">Upload Gambar:</label>
         <input type="file" id="gambar" name="gambar" accept="image/*" required><br><br>
 

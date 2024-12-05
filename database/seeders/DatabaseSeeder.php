@@ -176,72 +176,72 @@ class DatabaseSeeder extends Seeder
                 'berat'=>'30'
             ]
         ]);
-        // Seeder untuk users
-        for ($i = 1; $i <= 20; $i++) {
-            DB::table('users')->insert([
-                'name' => $faker->name,
-                'username' => $faker->userName,
-                'password' => bcrypt('password'),
-                'link_gambar' => $faker->imageUrl(),
-                'role' => $faker->randomElement(['admin', 'petugas', 'user']),
-                'point' => $faker->numberBetween(0, 100),
-                'location' => DB::raw("ST_GeomFromText('POINT(" . ($faker->longitude(113.7, 113.73)) . " " . ($faker->latitude(-8.17, -8.15)) . ")')"),
-                'alamat_lengkap' => $faker->address,
-                'id_kecamatan' => $faker->numberBetween(1, 4)
-            ]);
-        }
+        // // Seeder untuk users
+        // for ($i = 1; $i <= 20; $i++) {
+        //     DB::table('users')->insert([
+        //         'name' => $faker->name,
+        //         'username' => $faker->userName,
+        //         'password' => bcrypt('password'),
+        //         'link_gambar' => $faker->imageUrl(),
+        //         'role' => $faker->randomElement(['admin', 'petugas', 'user']),
+        //         'point' => $faker->numberBetween(0, 100),
+        //         'location' => DB::raw("ST_GeomFromText('POINT(" . ($faker->longitude(113.7, 113.73)) . " " . ($faker->latitude(-8.17, -8.15)) . ")')"),
+        //         'alamat_lengkap' => $faker->address,
+        //         'id_kecamatan' => $faker->numberBetween(1, 4)
+        //     ]);
+        // }
 
-        // Seeder untuk tempat_pembuangans
-        for ($i = 1; $i <= 10; $i++) {
-            DB::table('tempat_pembuangans')->insert([
-                'nama' => 'Tempat Pembuangan ' . $i,
-                'deskripsi' => $faker->sentence,
-                'daya_tampung' => $faker->randomFloat(2, 1000, 100000),
-                'jenis' => $faker->randomElement(['TPS', 'TPA']),
-                'link_gambar' => $faker->imageUrl(),
-                'id_kecamatan' => $faker->numberBetween(1, 4),
-                'location' => DB::raw("ST_GeomFromText('POINT(" . ($faker->longitude(113.7, 113.73)) . " " . ($faker->latitude(-8.17, -8.15)) . ")')")
-            ]);
-        }
+        // // Seeder untuk tempat_pembuangans
+        // for ($i = 1; $i <= 10; $i++) {
+        //     DB::table('tempat_pembuangans')->insert([
+        //         'nama' => 'Tempat Pembuangan ' . $i,
+        //         'deskripsi' => $faker->sentence,
+        //         'daya_tampung' => $faker->randomFloat(2, 1000, 100000),
+        //         'jenis' => $faker->randomElement(['TPS', 'TPA']),
+        //         'link_gambar' => $faker->imageUrl(),
+        //         'id_kecamatan' => $faker->numberBetween(1, 4),
+        //         'location' => DB::raw("ST_GeomFromText('POINT(" . ($faker->longitude(113.7, 113.73)) . " " . ($faker->latitude(-8.17, -8.15)) . ")')")
+        //     ]);
+        // }
 
-        // Seeder untuk jadwals
-        for ($i = 1; $i <= 10; $i++) {
-            DB::table('jadwals')->insert([
-                'waktu_mulai' => $faker->time,
-                'waktu_berakhir' => $faker->time
-            ]);
-        }
+        // // Seeder untuk jadwals
+        // for ($i = 1; $i <= 10; $i++) {
+        //     DB::table('jadwals')->insert([
+        //         'waktu_mulai' => $faker->time,
+        //         'waktu_berakhir' => $faker->time
+        //     ]);
+        // }
 
-        // Seeder untuk petugas
-        for ($i = 1; $i <= 5; $i++) {
-            DB::table('petugas')->insert([
-                'id_user' => $faker->numberBetween(1, 20),
-                'id_tempat_pembuangan' => $faker->numberBetween(1, 10),
-                'status' => $faker->randomElement(['siaga', 'rest', 'cuti']),
-                'role' => $faker->randomElement(['lapangan', 'penjaga'])
-            ]);
-        }
+        // // Seeder untuk petugas
+        // for ($i = 1; $i <= 5; $i++) {
+        //     DB::table('petugas')->insert([
+        //         'id_user' => $faker->numberBetween(1, 20),
+        //         'id_tempat_pembuangan' => $faker->numberBetween(1, 10),
+        //         'status' => $faker->randomElement(['siaga', 'rest', 'cuti']),
+        //         'role' => $faker->randomElement(['lapangan', 'penjaga'])
+        //     ]);
+        // }
 
-        // Seeder untuk jadwal_petugas
-        for ($i = 1; $i <= 10; $i++) {
-            DB::table('jadwal_petugas')->insert([
-                'id_petugas' => $faker->numberBetween(1, 5),
-                'id_jadwal' => $faker->numberBetween(1, 10)
-            ]);
-        }
+        // // Seeder untuk jadwal_petugas
+        // for ($i = 1; $i <= 10; $i++) {
+        //     DB::table('jadwal_petugas')->insert([
+        //         'id_petugas' => $faker->numberBetween(1, 5),
+        //         'id_jadwal' => $faker->numberBetween(1, 10)
+        //     ]);
+        // }
 
-        // Seeder untuk sampahs
-        for ($i = 1; $i <= 15; $i++) {
-            DB::table('sampahs')->insert([
-                'id_pengguna' => $faker->numberBetween(1, 20),
-                'id_petugas' => $faker->numberBetween(1, 5),
-                'id_tempat_pembuangan' => $faker->numberBetween(1, 10),
-                'id_jadwal' => $faker->numberBetween(1, 10),
-                'metode' => $faker->randomElement(['ambil', 'antar']),
-                'status' => $faker->randomElement(['pending', 'selesai', 'menunggu']),
-                'berat' => $faker->randomFloat(2, 1, 100)
-            ]);
-        }
+        // // Seeder untuk sampahs
+        // for ($i = 1; $i <= 15; $i++) {
+        //     DB::table('sampahs')->insert([
+        //         'id_pengguna' => $faker->numberBetween(1, 20),
+        //         'id_petugas' => $faker->numberBetween(1, 5),
+        //         'id_tempat_pembuangan' => $faker->numberBetween(1, 10),
+        //         'id_jadwal' => $faker->numberBetween(1, 10),
+        //         'metode' => $faker->randomElement(['ambil', 'antar']),
+        //         'status' => $faker->randomElement(['pending', 'selesai', 'menunggu']),
+        //         'berat' => $faker->randomFloat(2, 1, 100)
+        //     ]);
+        // }
 
     }
 }

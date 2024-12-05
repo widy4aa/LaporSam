@@ -29,7 +29,6 @@ return new class extends Migration
             $table->bigInteger('id_kecamatan')->unsigned();
             $table->rememberToken();
             $table->timestamps();
-
             $table->foreign('id_kecamatan')->references('id')->on('kecamatans')->onDelete('no action')->onUpdate('cascade');
         });
 
