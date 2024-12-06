@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\user;
 
+use App\Http\Controllers\Controller;
+use Auth;
 use DB;
 use Illuminate\Http\Request;
-use Session;
 
-class userDashboardController extends Controller
+class usersDashboardController extends Controller
 {
-    public function dashboard($username){
+    public function dashboard(Request $request){
+
+        $username = Auth::user()->username;
         $profile = DB::table('users')
         ->select('id','name','username','role')
         ->where('users.username','=',$username)
@@ -38,10 +41,7 @@ class userDashboardController extends Controller
         ->paginate(5);
 
 
-        session(['username' => $profile->username]);
-       // dd( Session::get('username', 'Guest'));
         return view('test.users.dashboard', compact('history_sampah', 'profile'));
 
     }
-
 }

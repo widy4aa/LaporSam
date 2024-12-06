@@ -10,7 +10,16 @@
     <div class="container vh-100 d-flex justify-content-center align-items-center">
         <div class="card p-4" style="width: 100%; max-width: 400px;">
             <h4 class="text-center mb-4">Laporsam/Logo</h4>
-            <form action="{{ route('login') }}" method="POST">
+            <form action="{{ route('loginProses') }}" method="POST">
+                @if($errors->any())
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <p>{{ $error }}<p>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 @csrf
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>

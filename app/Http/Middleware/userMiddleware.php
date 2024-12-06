@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleMiddleware
+class userMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,6 +16,11 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        if(!Auth::user() || Auth::user()->role != 'user'){
+            return redirect()->route('login');
+         }
+
+         return $next($request);
+
     }
 }
