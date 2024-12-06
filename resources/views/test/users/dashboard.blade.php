@@ -105,9 +105,9 @@
 
             <!-- Buttons Section -->
             <div class="buttons">
-                <button class="btn">Buang</button>
-                <button class="btn">Liat Tps</button>
-                <button class="btn">Leader</button>
+                <button class="btn"><a href="{{$profile->username}}/buang">buang</a></button>
+                <button class="btn"><a href="{{$profile->username}}/liatTps">Liat Tps</button>
+                <button class="btn"><a href="{{$profile->username}}/Leaderboard">Leader</button>
                 <button class="btn">Keluar</button>
             </div>
         </div>

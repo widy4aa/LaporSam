@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
+use Session;
 
 class userDashboardController extends Controller
 {
@@ -37,6 +38,8 @@ class userDashboardController extends Controller
         ->paginate(5);
 
 
+        session(['username' => $profile->username]);
+       // dd( Session::get('username', 'Guest'));
         return view('test.users.dashboard', compact('history_sampah', 'profile'));
 
     }
