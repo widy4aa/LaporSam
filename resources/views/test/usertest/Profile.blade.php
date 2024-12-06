@@ -43,7 +43,12 @@
                     <td>{{$user->alamat_lengkap }}</td>
                     <td>{{$user->kecamatan}}</td>
                     <td>
-                        <a href="/testDetailProfile/{{$user->id}}"> view</a>
+                        <a href="/testDetailProfile/{{$user->username}}"> view</a>
+                        <form action="/deleteUser/{{$user->username}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

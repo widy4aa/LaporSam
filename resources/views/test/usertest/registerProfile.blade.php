@@ -22,9 +22,7 @@
     </script>
 
 @php
-$kecamatans = [
-    'Wuluhan','Kencong','Gumukmas','Puger','Ambulu','Tempurejo','Silo','Mayang','Mumbulsari','Jenggawah','Ajung','Rambipuji','Balung','Umbulsari','Semboro','Jombang','Sumberbaru','Tanggul','Bangsalsari','Panti','Sukorambi','Arjasa','Pakusari','Kalisat','Ledokombo','Sumberjambe','Sukowono','Jelbuk','Kaliwates','Sumbersari','Patrang',
-];
+//dd($kecamatans);
 @endphp
 
 </head>
@@ -56,8 +54,8 @@ $kecamatans = [
         <label for="kecamatan">Kecamatan</label>
         <select id="kecamatan" name="kecamatan" placeholder="">
             @foreach ($kecamatans as $kecamatan )
-                <option value={{$kecamatan}}>
-                    {{$kecamatan}} </option>>
+                <option value={{$kecamatan->kecamatan}}>
+                    {{$kecamatan->kecamatan}} </option>>
             @endforeach
         </select>
         <button type="submit">Register</button>

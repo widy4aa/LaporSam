@@ -29,11 +29,12 @@ class userController extends Controller
     }
 
     public function registerProfile(){
-        return view('usertest.registerProfile');
+        $kecamatans = DB::table('kecamatans')->select('kecamatan')->get();
+        return view('usertest.registerProfile',compact('kecamatans'));
     }
 
 
-    public function userDetail($id){
+    public function userDetail($username){
              $user = DB::table('users')
              ->select('users.id', 'name', 'username', 'link_gambar', 'role', 'location', 'alamat_lengkap','point',
                       DB::raw('ST_X(location) AS lat'),
@@ -41,7 +42,7 @@ class userController extends Controller
                      'kecamatans.kecamatan'
                       )
              ->join('kecamatans', 'users.id_kecamatan', '=', 'kecamatans.id')
-             ->where('users.id','=',$id)
+             ->where('users.username','=',$username)
              ->first()
              ;
              if (!$user) {
@@ -54,36 +55,30 @@ class userController extends Controller
     public function registerUser(Request $request){
         $user = $request->all();
 
-        // Cek apakah username sudah ada di database
         $existingUser = DB::table('users')->where('username', $user['username'])->first();
 
         if ($existingUser) {
-            // Jika username sudah ada, kembalikan response error
             return response()->json(['error' => 'Username already exists.'], 400);
         }
 
-        // Set data default
         $user['point'] = 0;
         $user['role'] = 'user';
         $user['password'] = Hash::make($user['password']);
 
-        // Menangani lokasi jika ada
         if (isset($user['location'])) {
             $user['location'] = explode(', ', $user['location']);
         }
 
-        // Mendapatkan id_kecamatan dari tabel kecamatans
         $id_kecamatan = DB::table('kecamatans')->select('id')->where('kecamatan', '=', $user['kecamatan'])->first();
         $user['id_kecamatan'] = $id_kecamatan->id;
 
-        unset($user['kecamatan']); // Menghapus data kecamatan dari array user
+        unset($user['kecamatan']);
 
-        // Simpan data user tanpa gambar terlebih dahulu
         $userId = DB::table('users')->insertGetId([
             'name' => $user['name'],
             'username' => $user['username'],
             'alamat_lengkap' => $user['alamat_lengkap'],
-            'link_gambar' => 'dump.png',  // Sementara kosong
+            'link_gambar' => 'dump.png',
             'role' => $user['role'],
             'point' => $user['point'],
             'password' => $user['password'],
@@ -93,18 +88,39 @@ class userController extends Controller
             'location' => DB::raw("ST_GeomFromText('POINT(" . $user['location'][1] . " " . $user['location'][0] . ")')")
         ]);
 
-        // Menyimpan gambar dengan nama username
         if ($request->hasFile('gambar')) {
             $image = $request->file('gambar');
             $filename = $user['username'] . '.png';  // Nama file berdasarkan username
             $imagePath = $image->storeAs('img', $filename);
 
-            // Update kolom 'link_gambar' dengan path gambar yang baru
             DB::table('users')->where('id', $userId)->update(['link_gambar' => $imagePath]);
         }
 
-        // Mengembalikan respons sukses
         return response()->json(['message' => 'User registered successfully.'], 200);
 
     }
+
+    public function deleteUser ($username){
+
+        $user = User::find($username);
+        if (!$user) {
+            return response()->json([
+                'message' => 'Data tidak ditemukan.'
+            ], 404);
+        };
+
+        $user->delete();
+
+        return response()->json([
+            'message' => 'Data berhasil dihapus.'
+        ], 200);
+    }
+
+    public function updateUser(Request $request,$username){
+        dd($username);
+
+
+    }
+
+
 }

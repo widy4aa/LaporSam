@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,16 +8,19 @@
     <title>Document</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-@php
-$kecamatans = [
-    'Wuluhan','Kencong','Gumukmas','Puger','Ambulu','Tempurejo','Silo','Mayang','Mumbulsari','Jenggawah','Ajung','Rambipuji','Balung','Umbulsari','Semboro','Jombang','Sumberbaru','Tanggul','Bangsalsari','Panti','Sukorambi','Arjasa','Pakusari','Kalisat','Ledokombo','Sumberjambe','Sukowono','Jelbuk','Kaliwates','Sumbersari','Patrang',
-];
-@endphp
-
+    @php
+    $kecamatans = [
+        'Wuluhan', 'Kencong', 'Gumukmas', 'Puger', 'Ambulu', 'Tempurejo', 'Silo', 'Mayang', 'Mumbulsari', 'Jenggawah',
+        'Ajung', 'Rambipuji', 'Balung', 'Umbulsari', 'Semboro', 'Jombang', 'Sumberbaru', 'Tanggul', 'Bangsalsari', 'Panti',
+        'Sukorambi', 'Arjasa', 'Pakusari', 'Kalisat', 'Ledokombo', 'Sumberjambe', 'Sukowono', 'Jelbuk', 'Kaliwates', 'Sumbersari',
+        'Patrang',
+    ];
+    @endphp
 
 </head>
+
 <body>
     <h1>detail_profil</h1>
 
@@ -46,23 +50,39 @@ $kecamatans = [
                 <p>point {{$user->point}}</p>
             </div>
 
-            <input list="kecamatan" name="kecamatan" value="{{$user->kecamatan}}">
-            <datalist id="kecamatan">
-                @foreach ($kecamatans as $kecamatan )
-                    <option value={{$kecamatan}}>
-                @endforeach
-            </datalist>
+            <!-- Kecamatans Select with Bootstrap Class -->
+            <div class="mb-3">
+                <label for="kecamatan" class="form-label">Kecamatan</label>
+                <select id="kecamatan" name="pilihan" class="form-select" required>
+                    <option value="" disabled selected>-- Pilih --</option>
+                    @foreach ($kecamatans as $index => $kecamatan)
+                        @if ($index < 7)
+                            <option value="{{ $kecamatan }}" {{ $user->kecamatan == $kecamatan ? 'selected' : '' }}>{{ $kecamatan }}</option>
+                        @else
+                            <!-- Show all remaining items after 7 with scroll -->
+                            <option value="{{ $kecamatan }}" style="display: none;" {{ $user->kecamatan == $kecamatan ? 'selected' : '' }}>{{ $kecamatan }}</option>
+                        @endif
+                    @endforeach
+                </select>
+            </div>
 
-            <select id="kecamatan" name="pilihan" required>
-                <option value="" disabled selected>-- Pilih --</option>
-                @foreach ($kecamatans as $kecamatan )
-                    <option value={{$kecamatan}}>{{$kecamatan}}</option>
-                @endforeach
-            </select>
+            <!-- Gambar -->
+            <div class="mb-3">
+                <label for="image" class="form-label">Profile Image</label>
+                <div id="imagePreview" class="mb-2">
+                    @if ($user->link_gambar)
+                        {{-- <img src="{{ asset('storage/images/'.$user->image) }}" alt="Profile Image" style="max-width: 100px;"> --}}
+                        <p>image available</p>
+                    @else
+                        <p>No image available</p>
+                    @endif
+                </div>
+                <input type="file" class="form-control" id="image" name="image" style="display: none;">
+            </div>
 
             <div class="mb-3">
                 <label for="alamat_lengkap" class="form-label">Alamat Lengkap</label>
-                <input type="" class="form-control" id="alamat_lengkap" name="alamat_lengkap" value="{{ $user->alamat_lengkap }}" readonly>
+                <input type="text" class="form-control" id="alamat_lengkap" name="alamat_lengkap" value="{{ $user->alamat_lengkap }}" readonly>
             </div>
 
             <!-- Tombol Aksi -->
@@ -82,7 +102,8 @@ $kecamatans = [
             username: "{{ $user->username }}",
             location: "{{ $user->lat }} {{ $user->longt }}",
             kecamatan: "{{$user->kecamatan}}",
-            alamat_lengkap: "{{$user->alamat_lengkap}}"
+            alamat_lengkap: "{{$user->alamat_lengkap}}",
+            image: "{{ $user->link_gambar }}"
         };
 
         // Fungsi untuk meminta lokasi pengguna
@@ -115,6 +136,7 @@ $kecamatans = [
             document.getElementById('saveButton').style.display = 'inline-block';
             document.getElementById('cancelButton').style.display = 'inline-block';
             document.getElementById('updateLocationButton').style.display = 'inline-block';
+            document.getElementById('image').style.display = 'inline-block'; // Show image input
             this.style.display = 'none';
         });
 
@@ -134,6 +156,7 @@ $kecamatans = [
             document.getElementById('editButton').style.display = 'inline-block';
             document.getElementById('saveButton').style.display = 'none';
             document.getElementById('updateLocationButton').style.display = 'none';
+            document.getElementById('image').style.display = 'none'; // Hide image input
             this.style.display = 'none';
         });
 
@@ -141,22 +164,7 @@ $kecamatans = [
         document.getElementById('updateLocationButton').addEventListener('click', function () {
             getLocation();
         });
-
-        const input = document.getElementById('myInput');
-        const datalist = document.getElementById('myOptions');
-        const options = datalist.options;
-
-        input.addEventListener('input', () => {
-          const searchTerm = input.value.toLowerCase();
-          for (let i = 0; i < options.length; i++) {
-            const optionText = options[i].text.toLowerCase();
-            if (optionText.startsWith(searchTerm)) {
-              options[i].style.display = 'block';
-            } else {
-              options[i].style.display = 'none';
-            }
-          }
-        });
     </script>
 </body>
+
 </html>
