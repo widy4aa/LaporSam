@@ -35,13 +35,17 @@ class usersDashboardController extends Controller
         )
         ->join('users as pengguna', 'pengguna.id', '=', 'sampahs.id_pengguna')
         ->leftJoin('petugas', 'petugas.id', '=', 'sampahs.id_petugas')
-        ->leftJoin('users as petugas_user', 'petugas_user.id', '=', 'petugas.id_user')
+        ->leftJoin('users as petugas_user', 'petugas_user.id', '=', 'sampahs.id_petugas')
         ->where('sampahs.id_pengguna', '=', $profile->id)
         ->where('sampahs.status', '!=', 'selesai')
-        ->paginate(5);
+        ->paginate(perPage: 5);
 
 
         return view('test.users.dashboard', compact('history_sampah', 'profile'));
 
     }
+
+
+
+
 }

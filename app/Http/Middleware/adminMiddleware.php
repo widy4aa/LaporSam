@@ -19,7 +19,6 @@ class adminMiddleware
 
 
         if(!Auth::user() || Auth::user()->role != 'admin'){
-            dd('rusak');
            return redirect()->route('login');
         }
 

@@ -65,7 +65,7 @@
     <div class="container-fluid">
         <!-- Header -->
         <div class="header d-flex align-items-center justify-content-between">
-            <span class="fs-5 fw-bold">Text</span>
+            <span class="fs-5 fw-bold">Leaderboard</span>
             <div class="circle"></div>
         </div>
 
@@ -75,28 +75,23 @@
             <div class="history">
                 <table class="table">
                     <thead>
-                        @php
-                            // dd($history_sampah);
-                        @endphp
                       <tr>
-                        <th scope="col">Id</th>
+                        <th scope="col">No</th>
                         <th scope="col">Nama Pengguna</th>
-                        <th scope="col">Metode</th>
-                        <th scope="col">Berat</th>
-                        <th scope="col">Petugas Bertanggung Jawab</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Kecamatan</th>
+                        <th scope="col">Point</th>
                       </tr>
                     </thead>
                     <tbody>
-
-                        @foreach ($history_sampah as $sampah )
+                        @php
+                            $Nomor = 1 ;
+                        @endphp
+                        @foreach ($users as $user )
                             <tr>
-                                <td>{{$sampah->id}}</td>
-                                <td>{{$sampah->nama_pengguna}}</td>
-                                <td>{{$sampah->metode}}</td>
-                                <td>{{$sampah->berat}}</td>
-                                <td>{{$sampah->nama_petugas}}</td>
-                                <td>{{$sampah->status}}</td>
+                                <td>{{$Nomor ++ ;}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->kecamatan}}</td>
+                                <td>{{$user->point}}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -105,16 +100,6 @@
             </div>
 
             <!-- Buttons Section -->
-            <div class="buttons">
-                <button class="btn"><a href="/test/user/buang/">buang</a></button>
-                <button class="btn"><a href="{{$profile->username}}/liatTps">Liat Tps</button>
-                <button class="btn"><a href="/test/user/leaderboard/">Leader</button>
-                <form action="/logout" method="POST">
-                    @csrf
-                    @method('post')
-                    <button class="btn">logout</button>
-                </form>
-            </div>
         </div>
     </div>
 
