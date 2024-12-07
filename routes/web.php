@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\adminDashboardController;
+use App\Http\Controllers\admin\adminTempatPembuanganController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\petugas\petugasDashboardController;
 use App\Http\Controllers\user\buangController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\user\leaderboardController;
 use App\Http\Controllers\user\usersDashboardController;
 use App\Http\Controllers\userController;
 
+use App\Livewire\DetailTempatPembuangan;
 use App\Livewire\Formbuang;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +29,10 @@ Route::middleware('admin')->group(function () {
 
     Route::get('/test/dashboard/admin/',[adminDashboardController::class,'dashboard'])->name('admin.dashboard');
 
+    Route::get('/test/admin/TempatPembuangan',[adminTempatPembuanganController::class,'listTempatPembuangan'])->name('admin.listTempatPembuangan');
+    Route::get('/test/admin/TempatPembuangan/add',[adminTempatPembuanganController::class,'listTempatPembuangan'])->name('admin.listTempatPembuangan');
+   // Route::get('/test/admin/TempatPembuangan/{id}',[adminTempatPembuanganController::class,'detailTempatPembuangan'])->name('admin.detailTempatPembuangan');
+    Route::get('/test/admin/TempatPembuangan/{id}',DetailTempatPembuangan::class);
 
 
 

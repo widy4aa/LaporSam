@@ -5,6 +5,8 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -46,8 +48,23 @@ class User extends Authenticatable
         ];
     }
 
-    public function kecamatan()
+    protected $table = 'users';
+
+    // Relasi ke kecamatan
+    public function kecamatan(): BelongsTo
     {
-        return $this->belongsTo(Kecamatan::class);
+        return $this->belongsTo(kecamatan::class, 'id_kecamatan');
+    }
+
+    // Relasi ke petugas
+    public function petugas(): HasMany
+    {
+        return $this->hasMany(Petugas::class, 'id_user');
+    }
+
+    // Relasi ke sampah
+    public function sampahs(): HasMany
+    {
+        return $this->hasMany(Sampah::class, 'id_pengguna');
     }
 }
