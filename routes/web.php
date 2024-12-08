@@ -5,6 +5,9 @@ use App\Http\Controllers\admin\adminPetugasController;
 use App\Http\Controllers\admin\adminTempatPembuanganController;
 use App\Http\Controllers\admin\adminUserController;
 use App\Http\Controllers\authController;
+use App\Http\Controllers\petugas\ambilSampahController;
+use App\Http\Controllers\petugas\antarSampahController;
+use App\Http\Controllers\petugas\leaderboardPetugas;
 use App\Http\Controllers\petugas\petugasDashboardController;
 use App\Http\Controllers\user\buangController;
 use App\Http\Controllers\user\leaderboardController;
@@ -20,6 +23,8 @@ use App\Livewire\admin\PetugasForm;
 use App\Livewire\Formbuang;
 
 use App\Livewire\Petugas\Dashboard;
+use App\Livewire\Petugas\DetailSampahAmbil;
+use App\Livewire\Petugas\DetailSampahAntar;
 use Illuminate\Support\Facades\Route;
 
 //yang ngedit web php cuma dio kalo mau route ngomong yaww
@@ -64,6 +69,16 @@ Route::middleware('petugas')->group(function () {
 
     //test------------------------------------------------------------------
     Route::get( '/test/dashboard/petugas/',Dashboard::class)->name('petugas.dashboard');
+
+    Route::get('/test/petugas/sampah/antar',[antarSampahController::class,'listSampah'])->name('petugas.listSampahAntar');
+    Route::get('/test/petugas/sampah/antar/{id}',DetailSampahAntar::class)->name('petugas.SampahAntar');
+
+
+
+    Route::get('/test/petugas/sampah/ambil',[ambilSampahController::class,'listSampah'])->name('petugas.listSampahAmbil');
+    Route::get('/test/petugas/sampah/ambil/{id}',DetailSampahAmbil::class)->name('petugas.SampahAmbil');
+    Route::get('/test/petugas/leaderboard',[leaderboardPetugas::class,'leaderboardPetugas'])->name('petugas.leaderboard');
+
 
 
 });

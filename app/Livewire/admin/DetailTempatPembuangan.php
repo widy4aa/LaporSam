@@ -55,7 +55,6 @@ class DetailTempatPembuangan extends Component
         }
      //   dd($this->editableData['link_gambar']);
 
-        // Simpan perubahan (update database di sini)
         $this->tps = $this->editableData;
        // dd($this->tps['id'] );
 

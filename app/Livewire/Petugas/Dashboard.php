@@ -79,6 +79,7 @@ class Dashboard extends Component
             ;
         }
 
+      // dd($this->profile['sampahs']);
     }
 
     public function saveStatus()

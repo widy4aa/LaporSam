@@ -11,10 +11,11 @@
                         <a href="#" class="nav-link btn btn-outline-secondary w-100">HOME PAGE</a>
                     </li>
                     <li class="nav-item mb-2">
-                        <a href="#" class="nav-link btn btn-outline-secondary w-100">Persetujuan Sampah</a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a href="#" class="nav-link btn btn-outline-secondary w-100">Ambil Sampah</a>
+                        @if ($profile['role'] == 'penjaga')
+                            <a href="/test/petugas/sampah/antar" class="nav-link btn btn-outline-secondary w-100">Persetujuan Sampah</a>
+                         @else
+                            <a href="/test/petugas/sampah/ambil" class="nav-link btn btn-outline-secondary w-100">Ambil Sampah</a>
+                         @endif
                     </li>
                     <li class="nav-item mb-2">
                         <a href="#" class="nav-link btn btn-outline-secondary w-100">Leaderboard</a>
@@ -37,16 +38,17 @@
                     </thead>
                     <tbody>
                         <tr>
-
                             @php
                                 $no = 0 ;
                             @endphp
                             @foreach ($profile['sampahs'] as $sampah )
+                            <tr>
                                 <td>{{$sampah->id}}</td>
                                 <td>{{$sampah->User->name}}</td>
                                 <td>{{$sampah->berat}}</td>
                                 <td>{{$sampah->status}}</td>
                                 <td>{{$sampah->created_at->format('H:i')}}</td>
+                            </tr>
                             @endforeach
                         </tr>
                     </tbody>
