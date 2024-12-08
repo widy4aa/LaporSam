@@ -6,6 +6,8 @@
         </div>
     @endif
 
+    @php
+    @endphp
     <!-- Form Detail -->
     @if (!$isEditing)
         <h2>Detail TPS</h2>

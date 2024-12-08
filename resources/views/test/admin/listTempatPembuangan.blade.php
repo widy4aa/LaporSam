@@ -40,7 +40,7 @@
                             <option value="nama">Nama</option>
                             <option value="lokasi">Lokasi</option>
                         </select>
-                        <a href="/test/admin/TempatPembuangan/register">add</a>
+                        <a href="/test/admin/TempatPembuangan/add">add</a>
 
                     </div>
 

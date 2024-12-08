@@ -72,7 +72,7 @@
     <h2>Text</h2>
     <a href="#">HOME PAGE</a>
     <a href="/test/admin/TempatPembuangan">DAFTAR TPS / TPA</a>
-    <a href="#">Petugas</a>
+    <a href="/test/admin/Petugas">Petugas</a>
     <a href="#">Client</a>
 </div>
 

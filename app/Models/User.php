@@ -22,7 +22,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'username', 'name', 'alamat_lengkap', 'kecamatan', 'link_gambar', 'point', 'role', 'lat', 'longt', 'id_kecamatan'
+        'username', 'name', 'alamat_lengkap','password','kecamatan', 'link_gambar', 'point', 'role','location', 'id_kecamatan'
     ];
 
     /**
@@ -59,7 +59,7 @@ class User extends Authenticatable
     // Relasi ke petugas
     public function petugas(): HasMany
     {
-        return $this->hasMany(Petugas::class, 'id_user');
+        return $this->hasMany(petugas::class, 'id_user');
     }
 
     // Relasi ke sampah
@@ -67,4 +67,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Sampah::class, 'id_pengguna');
     }
+
+
 }
