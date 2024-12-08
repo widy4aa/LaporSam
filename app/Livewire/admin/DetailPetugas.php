@@ -52,7 +52,7 @@ class DetailPetugas extends Component
     }
 
     public function save(){
-        $user = User::find($this->petugas['id']);
+        $user = User::find(id: $this->petugas['id']);
 
         if ($this->editableData['password']){
             $user->update([

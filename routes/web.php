@@ -19,6 +19,7 @@ use App\Livewire\admin\Jadwal;
 use App\Livewire\admin\PetugasForm;
 use App\Livewire\Formbuang;
 
+use App\Livewire\Petugas\Dashboard;
 use Illuminate\Support\Facades\Route;
 
 //yang ngedit web php cuma dio kalo mau route ngomong yaww
@@ -62,7 +63,7 @@ Route::middleware('admin')->group(function () {
 Route::middleware('petugas')->group(function () {
 
     //test------------------------------------------------------------------
-    Route::get( '/test/dashboard/petugas/',[petugasDashboardController::class,'dashboard'])->name('petugas.dashboard');
+    Route::get( '/test/dashboard/petugas/',Dashboard::class)->name('petugas.dashboard');
 
 
 });

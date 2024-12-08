@@ -23,4 +23,9 @@ class petugas extends Model
     {
         return $this->belongsTo(tempat_pembuangan::class, 'id_tempat_pembuangan');
     }
+
+    public function jadwal_petugas()
+    {
+        return $this->hasMany(jadwal_petugas::class, 'id_petugas', 'id');
+    }
 }

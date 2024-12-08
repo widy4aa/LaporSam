@@ -11,7 +11,7 @@ class sampah extends Model
     protected $guarded = [];
 
         // Relasi ke User (Pengguna)
-        public function pengguna(): BelongsTo
+        public function user    (): BelongsTo
         {
             return $this->belongsTo(User::class, 'id_pengguna');
         }
@@ -23,7 +23,7 @@ class sampah extends Model
         }
 
         // Relasi ke Tempat Pembuangan
-        public function tempatPembuangan(): BelongsTo
+        public function tempat_pembuangan(): BelongsTo
         {
             return $this->belongsTo(tempat_pembuangan::class, 'id_tempat_pembuangan');
         }
