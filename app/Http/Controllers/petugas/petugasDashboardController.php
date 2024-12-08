@@ -10,8 +10,6 @@ class petugasDashboardController extends Controller
 {
     public function dashboard(){
 
-        echo 'aku berhasil login';
-        dd(Auth::user());
-
+        return view('test.petugas.dashboard');
     }
 }

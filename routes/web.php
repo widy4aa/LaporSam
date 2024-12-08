@@ -11,11 +11,14 @@ use App\Http\Controllers\user\leaderboardController;
 use App\Http\Controllers\user\usersDashboardController;
 use App\Http\Controllers\userController;
 
-use App\Livewire\DetailPetugas;
-use App\Livewire\DetailTempatPembuangan;
-use App\Livewire\DetailUser;
+use App\Livewire\admin\DetailPetugas;
+
+use App\Livewire\admin\DetailTempatPembuangan;
+use App\Livewire\admin\DetailUser;
+use App\Livewire\admin\Jadwal;
+use App\Livewire\admin\PetugasForm;
 use App\Livewire\Formbuang;
-use App\Livewire\PetugasForm;
+
 use Illuminate\Support\Facades\Route;
 
 //yang ngedit web php cuma dio kalo mau route ngomong yaww
@@ -48,6 +51,8 @@ Route::middleware('admin')->group(function () {
     Route::get('/test/admin/User',[adminUserController::class,'listPetugas'])->name('admin.listUser');
     Route::get('/test/admin/User/{id}/delete',[adminUserController::class,'deletUser'])->name('admin.delUser');
     Route::get('/test/admin/User/{id}',DetailUser::class)->name('admin.user');
+
+    Route::get('/test/admin/Jadwal',Jadwal::class)->name('admin.jadwal');
 
 
 

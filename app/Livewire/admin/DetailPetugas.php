@@ -1,33 +1,31 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\admin;
 
+use App\Models\petugas;
+use App\Models\tempat_pembuangan;
 use App\Models\User;
-use DB;
 use Livewire\Component;
 
-class DetailUser extends Component
+class DetailPetugas extends Component
 {
+    public $petugas ;
 
-    public $user ;
+    public $TempatPembuangan;
 
     public $isEditing = false;
     public $editableData = [];
 
     public function mount($id){
-        $data = User::with('kecamatan')
-        ->select('users.*',
-        DB::raw('ST_X(location) AS lat'),
-        DB::raw('ST_Y(location) AS longt'),)
-        ->where('role','=','user')
+        $data = User::with('kecamatan','petugas','petugas.tempat_pembuangan')
+        ->where('role','=','petugas')
         ->where('id','=',$id)
         ->get();
 
         $data=$data[0];
+        $this->TempatPembuangan = tempat_pembuangan::get();
 
-       // dd($data);
-
-        $this->user = [
+        $this->petugas = [
             'id' => $id,
             'name' => $data->name,
             'username' => $data->username,
@@ -35,24 +33,26 @@ class DetailUser extends Component
             'alamat_lengkap' => $data->alamat_lengkap,
             'point' => $data->point,
             'id_kecamatan' => $data->id_kecamatan,
-            'location' => $data->location_text,
-            'lat' =>$data->lat,
-            'longt' => $data->longt,
+            'tempat_pembuangan' => $data->petugas[0]->tempat_pembuangan->nama,
+            'id_tempat_pembuangan' => $data->petugas[0]->tempat_pembuangan->id,
+            'role' => $data->petugas[0]->role,
+            'status' => $data->petugas[0]->status,
             'link_gambar' =>$data->link_gambar,
             'password' =>'',
+            'id_petugas'=>$data->petugas[0]->id,
         ];
 
-       // dd($this->user);
 
-        $this->editableData = $this->user;
+        $this->editableData = $this->petugas;
     }
+
     public function edit()
     {
         $this->isEditing = true;
     }
 
     public function save(){
-        $user = User::find($this->user['id']);
+        $user = User::find($this->petugas['id']);
 
         if ($this->editableData['password']){
             $user->update([
@@ -69,18 +69,25 @@ class DetailUser extends Component
 
         $user->save();
 
-        return redirect()->route('admin.listUser');
+        $petugas = petugas::find($this->petugas['id_petugas']);
+        $petugas->update([
+            'id_tempat_pembuangan' => $this->editableData['id_tempat_pembuangan'],
+            'role' => $this->editableData['role'],
+        ]);
+
+        $petugas->save();
+
+        return redirect()->route('admin.listPetugas');
 
     }
-
     public function cancel()
     {
         $this->isEditing = false;
-        $this->editableData = $this->user;
+        $this->editableData = $this->petugas;
     }
 
     public function render()
     {
-        return view('test.admin.detail-user');
+        return view('test.admin.detail-petugas');
     }
 }
