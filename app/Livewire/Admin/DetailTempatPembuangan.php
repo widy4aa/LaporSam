@@ -3,12 +3,13 @@
 namespace App\Livewire\Admin;
 
 use App\Models\tempat_pembuangan;
+use DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class DetailTempatPembuangan extends Component
 {
-    use WithFileUploads; 
+    use WithFileUploads;
 
     public $tpsId;
     public $tps;
@@ -20,14 +21,22 @@ class DetailTempatPembuangan extends Component
         $this->tpsId = $id;
 
         $tempat = tempat_pembuangan::with('kecamatan')->find($this->tpsId);
-
+        $jumlahpetugas = tempat_pembuangan::findOrFail($this->tpsId)->petugas()->count();
+        $kordinatPengguna = tempat_pembuangan::find($this->tpsId)
+            ->select(
+                DB::raw('ST_X(location) AS lat'),
+                      DB::raw('ST_Y(location) AS longt'),)
+                      ->first();
         $this->tps = [
             'id' => $id,
             'nama' => $tempat->nama,
             'kecamatan' => $tempat->kecamatan->kecamatan,
             'daya_tampung' => $tempat->daya_tampung,
             'deskripsi' => $tempat->deskripsi,
-            'link_gambar' => $tempat->link_gambar
+            'link_gambar' => $tempat->link_gambar,
+            'jumlahpetugas' => $jumlahpetugas,
+            'lat'=> $kordinatPengguna->lat,
+            'longt'=> $kordinatPengguna->longt,
         ];
 
         // Ambil data TPS dari database
@@ -69,7 +78,7 @@ class DetailTempatPembuangan extends Component
 
         $this->isEditing = false;
 
-        session()->flash('message', 'Data TPS berhasil diperbarui.');
+        session()->flash( 'message', 'Data TPS berhasil diperbarui.');
     }
 
     public function cancel()

@@ -32,7 +32,7 @@ class AddTempatPembuangan extends Component
         $this->validate([
             'dataTempat.nama' => 'required|string|min:3|max:100',
             'dataTempat.deskripsi' => 'required|string|min:10|max:500',
-            'dataTempat.daya_tampung' => 'required|integer|min:1|max:10000',
+            'dataTempat.daya_tampung' => 'required|integer|min:1|max:100000000',
             'dataTempat.jenis' => 'required|in:TPA,TPS',
             'dataTempat.link_gambar' => 'required|image|max:2048',
             'dataTempat.id_kecamatan' => 'required|integer|exists:kecamatans,id',

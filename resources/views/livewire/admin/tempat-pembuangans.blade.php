@@ -25,7 +25,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             @foreach ($tempats as $t )
-            <a href="/detail"
+            <a href="/admin/TempatPembuangan/{{$t->id}}"
                 class="block bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200">
                 <img src="/storage/{{$t->link_gambar}}" alt="TPS 1" class="w-full h-48 object-cover">
                 <div class="p-4">

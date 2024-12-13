@@ -2,6 +2,6 @@
 @livewireStyles
 @section('content')
 
-@livewire('admin.detail-tempat-pembuangan')
+@livewire('admin.detail-tempat-pembuangan',['id' => $id])
 @livewireScripts
 @endsection

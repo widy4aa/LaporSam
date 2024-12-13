@@ -28,7 +28,7 @@
         </ul>
         <button class="btn btn-primary" wire:click="edit">Edit</button>
         <button class="btn btn-danger" wire:click="delete">Hapus</button>
-        <a href="{{ url('/test/admin/Petugas/') }}" class="btn btn-secondary">Back</a>
+        <a href="" class="btn btn-secondary">Back</a>
     @else
         <!-- Editable Form -->
         <h2>Edit TPS</h2>
