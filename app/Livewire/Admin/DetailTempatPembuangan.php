@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\admin;
+namespace App\Livewire\Admin;
 
 use App\Models\tempat_pembuangan;
 use Livewire\Component;
@@ -8,7 +8,7 @@ use Livewire\WithFileUploads;
 
 class DetailTempatPembuangan extends Component
 {
-    use WithFileUploads; // Gunakan trait untuk menangani file upload
+    use WithFileUploads; 
 
     public $tpsId;
     public $tps;
@@ -88,6 +88,6 @@ class DetailTempatPembuangan extends Component
 
     public function render()
     {
-        return view(view: 'test.admin.detail-tempat-pembuangan');
+        return view('livewire.admin.detail-tempat-pembuangan');
     }
 }

@@ -37,7 +37,7 @@ class userController extends Controller
     public function userDetail($username){
              $user = DB::table('users')
              ->select('users.id', 'name', 'username', 'link_gambar', 'role', 'location', 'alamat_lengkap','point',
-                      DB::raw('ST_X(location) AS lat'),
+                      DB::raw(value: 'ST_X(location) AS lat'),
                       DB::raw('ST_Y(location) AS longt'),
                      'kecamatans.kecamatan'
                       )

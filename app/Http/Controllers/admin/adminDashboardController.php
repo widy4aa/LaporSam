@@ -30,14 +30,21 @@ class adminDashboardController extends Controller
 
         $namaKecamatanTerbanyak = kecamatan::find($kecamatanTerbanyak->id_kecamatan);
 
+        $historyBuang = sampah::with('petugas','user','petugas.user','user.kecamatan')
+        ->limit(5)
+        ->where('status','=','selesai')
+        ->orderBy('id','desc')
+        ->get();
+       // dd($historyBuang);
 
 
-        return view('test.admin.dashboard',
+        return view('admin.dashboard',
         compact('jumlahUser',
         'jumlahPetugas',
                     'totalBerat',
                     'dataProfile',
-                    'namaKecamatanTerbanyak'
+                    'namaKecamatanTerbanyak',
+                    'historyBuang'
     ));
 
     }

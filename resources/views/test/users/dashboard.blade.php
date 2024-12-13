@@ -83,7 +83,6 @@
                         <th scope="col">Nama Pengguna</th>
                         <th scope="col">Metode</th>
                         <th scope="col">Berat</th>
-                        <th scope="col">Petugas Bertanggung Jawab</th>
                         <th scope="col">Status</th>
                       </tr>
                     </thead>
@@ -95,7 +94,6 @@
                                 <td>{{$sampah->nama_pengguna}}</td>
                                 <td>{{$sampah->metode}}</td>
                                 <td>{{$sampah->berat}}</td>
-                                <td>{{$sampah->nama_petugas}}</td>
                                 <td>{{$sampah->status}}</td>
                             </tr>
                         @endforeach
