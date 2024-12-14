@@ -57,6 +57,8 @@ class AddTempatPembuangan extends Component
             'location' => DB::raw("ST_GeomFromText('POINT($longitude $latitude)')")
       ]);
 
+      session()->flash( 'message', 'Data TPS Berhasil Ditambahkan.');
+
       return redirect()->route('admin.listTempatPembuangan');
 
     }

@@ -10,21 +10,7 @@ class adminPetugasController extends Controller
 {
     //
     public function listPetugas(){
-        $users = User::with('kecamatan')
-        ->with('petugas')
-        ->where('role','=','petugas')
-        ->paginate(10);
-
-      // dd($petugas);
-
-        return view('test.admin.listDataPetugas',compact('users'));
+        return view('admin.listPetugas');
     }
 
-    public function deletePetugas($id){
-        $user = User::find($id);
-        if ($user) {
-            $user->delete();
-        }
-        return redirect()->route('admin.listPetugas');
-    }
 }

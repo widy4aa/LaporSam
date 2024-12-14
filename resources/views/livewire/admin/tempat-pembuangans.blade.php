@@ -1,4 +1,21 @@
 <div>
+    @if (session()->has('message'))
+    <div class="mx-48 mt-6 bg-green-100 border-green-500 shadow-md rounded-lg p-6 ">
+        <div class="alert alert-success text-xl ">
+            {{ session('message') }}
+        </div>
+    </div>
+    @endif
+
+    @if (session()->has('hapus'))
+    <div class="mx-48 mt-6 bg-red-100 border-red-500 shadow-md rounded-lg p-6 ">
+        <div class="alert alert-success text-xl ">
+            {{ session('hapus') }}
+        </div>
+    </div>
+    @endif
+
+
     <div class="container mx-auto p-6 bg-inherit">
         <h1 class="text-3xl font-bold text-gray-800 mb-6">Data TPS/TPA</h1>
 

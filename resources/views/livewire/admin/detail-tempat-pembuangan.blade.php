@@ -1,7 +1,7 @@
-<div class="container mt-4">
-    <!-- Flash Message -->
+<div>
+
     @if (session()->has('message'))
-    <div class="mx-6 bg-yellow-100 border-yellow-500 shadow-md rounded-lg p-6 ">
+    <div class="mx-48 mt-6 bg-yellow-100 border-yellow-500 shadow-md rounded-lg p-6 ">
         <div class="alert alert-success text-xl ">
             {{ session('message') }}
         </div>
@@ -9,6 +9,7 @@
     @endif
 
     @php
+
     @endphp
     <!-- Form Detail -->
     @if (!$isEditing)
@@ -105,9 +106,10 @@
                         class="px-6 py-2 bg-sky-900 text-gray-100 rounded-lg hover:bg-sky-600 transition duration-200">
                         Simpan
                     </button>
-                    <a href="/tp"
+                    <a
+                        wire:click="cancel"
                         class="px-6 py-2 bg-gray-900 text-gray-100 rounded-lg hover:bg-gray-600 transition duration-200">
-                        Kembali
+                        cancel
                     </a>
                 </div>
             </form>

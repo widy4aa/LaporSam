@@ -41,6 +41,6 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/TempatPembuangan/add',[adminTempatPembuanganController::class,'addTempatPembuangan'])->name('admin.addTempatPembuangan');
     Route::get('/admin/TempatPembuangan/{id}',[adminTempatPembuanganController::class,'DetailTempatPembuangan'])->name(('admin.TempatPembuangan'));
 
-
+    
 
 });

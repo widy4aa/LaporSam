@@ -91,7 +91,7 @@ class DetailTempatPembuangan extends Component
         $data = tempat_pembuangan::findOrFail($this->tpsId);
         $data->delete();
 
-        session()->flash('message', 'Data berhasil dihapus.');
+        session()->flash('hapus', 'Data berhasil dihapus.');
         return redirect()->route('admin.listTempatPembuangan');
     }
 

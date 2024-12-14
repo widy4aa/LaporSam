@@ -61,7 +61,10 @@
         </ul>
 
         <div class="mt-auto">
-            <a href="{{ route('logout') }}"
+            <form action="/logout" method="post">
+                @csrf
+                @method('post')
+                <button type="submit"
                 class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <svg class="flex-shrink-0 w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor" viewBox="0 0 20 20">
@@ -70,6 +73,8 @@
                 </svg>
                 <span class="flex-1 ms-3 whitespace-nowrap">Keluar</span>
             </a>
+            </form>
+
         </div>
     </div>
 </aside>
