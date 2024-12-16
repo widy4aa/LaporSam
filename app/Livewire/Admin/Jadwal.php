@@ -45,6 +45,6 @@ class Jadwal extends Component
 
     public function render()
     {
-        return view('test.admin.jadwal');
+        return view('admin.jadwal');
     }
 }

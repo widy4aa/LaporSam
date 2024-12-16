@@ -13,4 +13,12 @@ class adminPetugasController extends Controller
         return view('admin.listPetugas');
     }
 
+    public function addPetugas(){
+        return view('admin.addPetugas');
+    }
+
+    public function petugas($id){
+        return view('admin.petugas',compact('id'));
+    }
+
 }

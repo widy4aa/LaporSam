@@ -1,4 +1,5 @@
 <div>
+    {{-- Do your work, then step back. --}}
     @if (session()->has('success'))
     <div class="mx-48 mt-6 bg-green-100 border-green-500 shadow-md rounded-lg p-6 ">
         <div class="alert alert-success text-xl ">
@@ -22,7 +23,7 @@
     @endif
     <div class="container mx-auto p-6 bg-inherit">
         <div class="bg-white shadow-md rounded-lg p-6 ">
-            <h1 class="text-3xl font-bold text-gray-800 mb-6">Data Petugas</h1>
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Data Client</h1>
             <div class="flex justify-between items-center mb-6">
                 <div class="flex">
                     <input
@@ -37,11 +38,11 @@
                         Cari
                     </button>
                 </div>
-                <button
-                wire:click="addTempat"
+                {{-- <button
+                wire:click="addClient"
                 class="ml-2 px-8 py-4 bg-green-500 text-white rounded-lg hover:bg-green-600">
                 Tambah
-            </button>
+            </button> --}}
             </div>
 
             <table class="min-w-full bg-white border border-gray-300 rounded-lg">
@@ -50,7 +51,6 @@
                         <th class="py-3 px-6 text-left">No</th>
                         <th class="py-3 px-6 text-left">Nama</th>
                         <th class="py-3 px-6 text-left">Username</th>
-                        <th class="py-3 px-6 text-left">Status</th>
                         <th class="py-3 px-6 text-left">Kecamatan</th>
                         <th class="py-3 px-6 text-left">Actions</th>
                     </tr>
@@ -60,16 +60,15 @@
                     $No = 1;
 
                     @endphp
-                    @foreach ($petugas as $p)
+                    @foreach ($client as $c)
                     <tr class="hover:bg-gray-100">
                         <td class="border-t py-3 px-6">{{$No++;}}</td>
-                        <td class="border-t py-3 px-6">{{$p->user->name}}</td>
-                        <td class="border-t py-3 px-6">{{$p->user->username}}</td>
-                        <td class="border-t py-3 px-6">{{$p->status}}</td>
-                        <td class="border-t py-3 px-6">{{$p->user->kecamatan->kecamatan}}</td>
+                        <td class="border-t py-3 px-6">{{$c->name}}</td>
+                        <td class="border-t py-3 px-6">{{$c->username}}</td>
+                        <td class="border-t py-3 px-6">{{$c->kecamatan->kecamatan}}</td>
                         <td>
                             <a
-                            href="/admin/petugas/{{$p->id}}"
+                            href="/admin/client/{{$c->id}}"
                             class="px-6 mx-2 py-2 bg-yellow-500 text-gray-100 rounded-lg hover:bg-yellow-600 transition duration-200">
                             Detail
                         </a>

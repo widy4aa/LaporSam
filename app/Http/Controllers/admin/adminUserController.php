@@ -8,21 +8,18 @@ use Illuminate\Http\Request;
 
 class adminUserController extends Controller
 {
-    public function listPetugas(){
-        $users = User::with('kecamatan')
-        ->where('role','=','user')
-        ->paginate(10);
+    public function listClient(){
 
-      // dd($petugas);
-
-        return view('test.admin.listDataUser',compact('users'));
+        return view('admin.listClient');
     }
-    public function deleteUser($id){
-        $user = User::find($id);
-        if ($user) {
-            $user->delete();
-        }
-        return redirect()->route('admin.listUser');
+
+    public function client($id){
+        return view('admin.client',compact('id'));
+    }
+
+    public function addClient(){
+
+        return view('admin.addClient');
     }
 
 
