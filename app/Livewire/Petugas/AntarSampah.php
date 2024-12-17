@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\petugas;
+namespace App\Livewire\Petugas;
 
-use App\Http\Controllers\Controller;
 use App\Models\sampah;
 use App\Models\User;
 use Auth;
-use Illuminate\Http\Request;
+use Livewire\Component;
 
-class ambilSampahController extends Controller
+class AntarSampah extends Component
 {
-    public function listSampah(){
+    public $sampahs;
+    public function mount(){
         $dataAuth = Auth::user();
 
         $dataProfile = User::with(
@@ -35,17 +35,18 @@ class ambilSampahController extends Controller
             'role' => $dataProfile->petugas[0]->role,
         ];
 
-
-        if ($profile['role']== 'lapangan'){
-            $sampahs= Sampah::with('User')
-            ->where('id_petugas', '=', $profile['id_petugas'] )
+        if ($profile['role'] == 'penjaga'){
+            $this->sampahs= sampah::with('tempat_pembuangan','User')
+            ->where('id_tempat_pembuangan','=',$profile['id_tempat_pembuangan'])
             ->where('status', '!=', 'selesai')
-            ->where('metode','=', 'ambil')
+            ->where('metode','=', 'antar')
             ->get()
             ;
         }
 
-        return view('test.petugas.listSampahAmbil',compact('sampahs','profile'));
-
+    }
+    public function render()
+    {
+        return view('livewire.petugas.antar-sampah');
     }
 }

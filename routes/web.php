@@ -1,14 +1,16 @@
 <?php
 
 use App\Http\Controllers\authController;
+use App\Livewire\Register;
 use Illuminate\Support\Facades\Route;
 
 //yang ngedit web php cuma dio kalo mau route ngomong yaww
 
 // Route::get(uri: '/',action: [authController::class,'login'])->name('login');
-Route::get('/test/login',action: [authController::class,'login'])->name('login');
+Route::get('/login',action: [authController::class,'login'])->name('login');
 Route::post('/test/login/proses',[authController::class,'loginProses'])->name('loginProses');
 Route::post('/logout',[authController::class,'logout'])->name('logout');
+Route::get('/register',Register::class);
 
 
 require base_path('routes/admin.php');

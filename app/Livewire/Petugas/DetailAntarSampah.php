@@ -8,7 +8,7 @@ use Auth;
 use DB;
 use Livewire\Component;
 
-class DetailSampahAmbil extends Component
+class DetailAntarSampah extends Component
 {
     public $isEditing = false;
     public $dataAuth ;
@@ -21,7 +21,7 @@ class DetailSampahAmbil extends Component
 
     public $editableData = [];
 
-    public $sampahId;
+    public $sampahId ;
 
     public function mount($id){
 
@@ -67,17 +67,14 @@ class DetailSampahAmbil extends Component
         $this->profile['jadwals']=$this->profile['jadwals'][0]->petugas[0]->jadwal_petugas;
 
 
-        $id_petugas =$this->profile['id_petugas'];
 
-        if ($this->profile['role'] == 'lapangan'){
-            $this->dataSampah = Sampah::with('User')
-            ->where('id_petugas', '=', $id_petugas )
+        if ($this->profile['role'] == 'penjaga'){
+            $this->dataSampah = Sampah::with('tempat_pembuangan', 'User', 'User.kecamatan')
+            ->where('id_tempat_pembuangan', '=', $this->profile['id_tempat_pembuangan'])
             ->where('status', '!=', 'selesai')
-            ->where('metode','=', 'ambil')
+            ->where('metode', '=', 'antar')
             ->where('id','=',$this->sampahId)
-            ->first()
-            ;
-
+            ->first();
 
             $kordinatPengguna = User::find($this->dataSampah->id_pengguna)
             ->select(
@@ -103,6 +100,8 @@ class DetailSampahAmbil extends Component
             "longt" => $kordinatPengguna->longt,
             "kecamatan" => $this->dataSampah->User->kecamatan->kecamatan
         ];
+
+
 
         $this->editableData = $this->sampah;
        // dd($this->editableData);
@@ -155,13 +154,13 @@ class DetailSampahAmbil extends Component
 
         $this->isEditing = false;
 
-        session()->flash('message', 'Data TPS berhasil diperbarui.');
+        session()->flash('success', 'Sampah Sudah Di Setujui');
 
-        return redirect()->route(route: 'petugas.listSampahAmbil');
+        return redirect()->route(route: 'petugas.jobdesk');
     }
 
     public function render()
     {
-        return view('test.petugas.detail-sampah-ambil');
+        return view('livewire.petugas.detail-antar-sampah');
     }
 }

@@ -41,6 +41,7 @@ class Dashboard extends Component
             'role' => $this->dataProfile->petugas[0]->role,
         ];
 
+
        // dd($this->profile['id_tempat_pembuangan']);
 
         $this->status = $this->profile['status'];
@@ -105,7 +106,7 @@ class Dashboard extends Component
 
     public function render()
     {
-        return view('test.petugas.dashboard');
+        return view('livewire.petugas.dashboard');
     }
 
 

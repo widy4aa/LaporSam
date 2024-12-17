@@ -32,8 +32,8 @@
                             <th>No</th>
                             <th>Nama Pembuang</th>
                             <th>Berat</th>
-                            <th>Status</th>
                             <th>Dibuat Jam</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
